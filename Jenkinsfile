@@ -25,6 +25,7 @@ pipeline {
                 
             }
         }
+        }
         stage('Install dependencies') {
             steps {
                 echo 'Install deps..'
@@ -52,6 +53,7 @@ pipeline {
                 
             }
         }
+        }
         stage('Package') {
             steps {
                 echo 'npm build'
@@ -73,4 +75,5 @@ pipeline {
             }
        }
     }
+
 }
