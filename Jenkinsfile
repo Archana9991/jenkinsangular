@@ -6,24 +6,17 @@ pipeline {
     stages {
         stage('Check version') {
             steps {
-                echo 'Cleaning..'
+                echo 'Checking..'
                 bat 'npm --version'
             }
-          post{
-            
-            
-                success{
-                    slackSend channel: '#jenkins', 
-
-                          message: 'cleaning successfull'
-                }
-                failure{
-                     slackSend channel: '#jenkins', 
-                      
-
-                          message: 'cleaning failure'
-                
+          post{ 
+          success{
+             slackSend message : 'Successfully checked'
+       
             }
+          failure {
+           slackSend message : 'Checking failed'
+        }
         }
         }
         stage('Install dependencies') {
@@ -31,50 +24,44 @@ pipeline {
                 echo 'Install deps..'
                 bat 'npm install'
             }
+          post{ 
+          success{
+             slackSend message : 'Successfully installed'
+       
+            }
+          failure {
+           slackSend message : 'Installation failed'
+        }
+        }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
                 bat 'npm test'
             }
-          post{
-            
-            
-                success{
-                    slackSend channel: '#jenkins', 
-
-                          message: 'testing successfull'
-                }
-                failure{
-                     slackSend channel: '#jenkins', 
-                      
-
-                          message: 'testing failure'
-                
+          post{ 
+          success{
+             slackSend message : 'Successfully tested'
+       
             }
+          failure {
+           slackSend message : 'Testing failed'
+        }
         }
         }
         stage('Package') {
             steps {
                 echo 'npm build'
             }
-        } post{
-            
-            
-                success{
-                    slackSend channel: '#jenkins', 
-
-                          message: 'successful packaging '
-                }
-                failure{
-                     slackSend channel: '#jenkins', 
-                      
-
-                          message: 'failure packaging '
-                
+          post{ 
+          success{
+             slackSend message : 'Successfully build'
+       
             }
-       }
+          failure {
+           slackSend message : 'Building failed'
+        }
+        }
+        }
     }
-
-}
 }
